@@ -29,9 +29,6 @@
     self.title = @"爆料";
      [self setupTableView];
     [self getDateOfWeek];
-    
-   
-    
 }
 
 -(void)getDateOfWeek

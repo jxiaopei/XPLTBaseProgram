@@ -116,44 +116,40 @@
 
 -(void)postDataWithUrl:(NSString *)urlString parameters:(id)parameters success:(NetRequestSuccessBlock)success fail:(NetRequestFailedBlock)fail
 {
-    AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    // 设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 20;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:urlString parameters:parameters constructingBodyWithBlock:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         NSDictionary * dictData = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         success(dictData);
         
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        fail(error);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"数据获取失败");
         NSLog(@"error111  %@",error.description);
     }];
+
 }
 
 
 -(void)getDataWithUrl:(NSString *)urlString parameters:(id)parameters success:(NetRequestSuccessBlock)success fail:(NetRequestFailedBlock)fail
 {
-    AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    // 设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 20;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         NSDictionary * dictData = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         success(dictData);
         
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        fail(error);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"数据获取失败");
         NSLog(@"error111  %@",error.description);
     }];
