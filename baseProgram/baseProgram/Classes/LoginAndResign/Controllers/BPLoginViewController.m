@@ -154,17 +154,18 @@
         
         return;
     }
-    BPUserModel *model = [[NSUserDefaults standardUserDefaults]objectForKey:_phoneText.text];
     
-    if(!model.userName || model.userName.length == 0)
+    YYCache *cache = [YYCache cacheWithName:CacheKey];
+    if(! [cache containsObjectForKey:_phoneText.text])
     {
         [MBProgressHUD showError:@"此账号不存在,请注册后再登录"];
         return;
     }
     
-    [MBProgressHUD showMessage:@"正在登录"];
+    BPUserModel *model = (BPUserModel *)[cache objectForKey:_phoneText.text];
+//    [MBProgressHUD showMessage:@"正在登录"];
      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         [MBProgressHUD hideHUD];
+//         [MBProgressHUD hideHUD];
          
          if(![model.password isEqualToString:_passwordText.text])
          {
@@ -184,7 +185,10 @@
                  model1.isLogin = YES;
                  model1.userName = _phoneText.text;
                  model1.password = _passwordText.text;
-                 [[NSUserDefaults standardUserDefaults]setObject:model forKey:_phoneText.text];
+                 model.userName = _phoneText.text;
+                 model.password = _passwordText.text;
+                 [cache setObject:model forKey:_phoneText.text];
+                 [[NSUserDefaults standardUserDefaults] setObject:_phoneText.text forKey:@"lastUser"];
                  [self.navigationController popViewControllerAnimated:YES];
                  
              }else{
@@ -201,6 +205,12 @@
 {
     [_phoneText endEditing:YES];
     [_passwordText endEditing:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MBProgressHUD hideHUD];
 }
 
 @end

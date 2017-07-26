@@ -46,6 +46,7 @@
 		8839DA551F288205008D6D3D /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 8839DA511F288205008D6D3D /* MBProgressHUD+Add.m */; };
 		8839DA561F288205008D6D3D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 8839DA531F288205008D6D3D /* MBProgressHUD+MJ.m */; };
 		8839DA571F288205008D6D3D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8839DA541F288205008D6D3D /* MBProgressHUD.bundle */; };
+		8839DA5A1F288E2B008D6D3D /* BPSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8839DA591F288E2B008D6D3D /* BPSettingTableViewCell.m */; };
 		88A1FB601F246B8B0059A0C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1FB5F1F246B8B0059A0C4 /* AppDelegate.m */; };
 		88A1FB631F246C220059A0C4 /* BPRouteTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1FB621F246C220059A0C4 /* BPRouteTarget.m */; };
 		88A1FB661F246C690059A0C4 /* BPNewsDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1FB651F246C690059A0C4 /* BPNewsDetailTableViewCell.m */; };
@@ -151,6 +152,8 @@
 		8839DA521F288205008D6D3D /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		8839DA531F288205008D6D3D /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		8839DA541F288205008D6D3D /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		8839DA581F288E2B008D6D3D /* BPSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPSettingTableViewCell.h; sourceTree = "<group>"; };
+		8839DA591F288E2B008D6D3D /* BPSettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPSettingTableViewCell.m; sourceTree = "<group>"; };
 		88A1FB5F1F246B8B0059A0C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		88A1FB611F246C220059A0C4 /* BPRouteTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPRouteTarget.h; sourceTree = "<group>"; };
 		88A1FB621F246C220059A0C4 /* BPRouteTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPRouteTarget.m; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 		8839DA331F272BDA008D6D3D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8839DA581F288E2B008D6D3D /* BPSettingTableViewCell.h */,
+				8839DA591F288E2B008D6D3D /* BPSettingTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -616,7 +621,7 @@
 					881C253E1F2086D00093C303 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 76PSW8X855;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -750,6 +755,7 @@
 				8839DA561F288205008D6D3D /* MBProgressHUD+MJ.m in Sources */,
 				88B93FD61F25BC6400790F2A /* BPLoginViewController.m in Sources */,
 				8839DA391F27303E008D6D3D /* BPChangeUserNameViewController.m in Sources */,
+				8839DA5A1F288E2B008D6D3D /* BPSettingTableViewCell.m in Sources */,
 				8831C6741F21D17A00DB1968 /* CheckHelper.m in Sources */,
 				88A1FB631F246C220059A0C4 /* BPRouteTarget.m in Sources */,
 				8831C7001F246A4000DB1968 /* BPNewsShowMoreCell.m in Sources */,
@@ -923,7 +929,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = baseProgram/baseProgram.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 76PSW8X855;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -940,8 +946,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eric.baseProgram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ec4591bf-98f9-4954-873f-8f45a5e080e6";
+				PROVISIONING_PROFILE_SPECIFIER = ericBaseProgramAppStore;
 			};
 			name = Debug;
 		};
@@ -953,7 +959,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = baseProgram/baseProgram.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 76PSW8X855;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -970,8 +976,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eric.baseProgram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ec4591bf-98f9-4954-873f-8f45a5e080e6";
+				PROVISIONING_PROFILE_SPECIFIER = ericBaseProgramAppStore;
 			};
 			name = Release;
 		};

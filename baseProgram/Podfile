@@ -14,4 +14,5 @@ target 'baseProgram' do
   pod 'MJExtension'
   pod 'SVProgressHUD'
   pod 'Masonry'
+  pod 'YYCache'
 end

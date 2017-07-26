@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BPUserModel : NSObject
+@interface BPUserModel : NSObject<NSCoding>
 
 @property(nonatomic,copy)NSString *userName;
 @property(nonatomic,copy)NSString *changeUserName;

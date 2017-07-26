@@ -86,9 +86,9 @@
         return;
     }
     
-    [MBProgressHUD showMessage:@"正在修改"];
+//    [MBProgressHUD showMessage:@"正在修改"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         
         
         AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
@@ -96,10 +96,11 @@
             
             if(status == AFNetworkReachabilityStatusReachableViaWiFi || status == AFNetworkReachabilityStatusReachableViaWWAN)
             {
+                YYCache *cache = [YYCache cacheWithName:CacheKey];
                 [MBProgressHUD showSuccess:@"修改成功"];
                 BPUserModel *model = [BPUserModel shareModel];
                 model.changeUserName = _accountNameText.text;
-                [[NSUserDefaults standardUserDefaults] setObject:model forKey:model.userName];
+                [cache setObject:model forKey:model.userName];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }else{
@@ -111,5 +112,11 @@
     });
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MBProgressHUD hideHUD];
+}
 
 @end

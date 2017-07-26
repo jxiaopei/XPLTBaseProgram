@@ -195,27 +195,30 @@
         
         return;
     }
-    BPUserModel *model = [[NSUserDefaults standardUserDefaults]objectForKey:_phoneText.text];
-    if(model.userName && model.userName.length != 0)
+
+    YYCache *cache = [YYCache cacheWithName:CacheKey];
+    if([cache containsObjectForKey:_phoneText.text])
     {
         [MBProgressHUD showError:@"此账号已存在,请直接登录"];
         [self popToLoginViewController];
         return;
     }
     
-    [MBProgressHUD showMessage:@"正在注册"];
+//    [MBProgressHUD showMessage:@"正在注册"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUD];
+        
+//        [MBProgressHUD hideHUD];
+        
         AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
         [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             
             if(status == AFNetworkReachabilityStatusReachableViaWiFi || status == AFNetworkReachabilityStatusReachableViaWWAN)
             {
                 [MBProgressHUD showSuccess:@"注册成功"];
-               BPUserModel *model =  [BPUserModel shareModel];
+                BPUserModel *model =  [BPUserModel shareModel];
                 model.userName = _phoneText.text;
                 model.password = _passwordText.text;
-                [[NSUserDefaults standardUserDefaults]setObject:model forKey:_phoneText.text];
+                [cache setObject:model forKey:_phoneText.text];
 
                 [self popToLoginViewController];
             }else{
@@ -247,6 +250,12 @@
     [_phoneText endEditing:YES];
     [_passwordText endEditing:YES];
     [_secPasswordText endEditing:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MBProgressHUD hideHUD];
 }
 
 @end

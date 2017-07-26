@@ -23,12 +23,14 @@
 #import "CheckHelper.h"
 #import "MBProgressHUD+MJ.h"
 #import "BPUserModel.h"
+#import "YYCache.h"
 
 #define AppKey @"597744184ad1563827000c55" //友盟appKey
 #define AppSecret @"zyrwbkheorycufhbdcezn2svhcqrgx73"  //友盟app 秘钥
 
 #define COMPANYURL @"http://169.56.130.9/index/index/" //公司判断审核开关
 #define COMPANYPARA @{@"app_id":@"1262894465"}  //appID
+#define CacheKey  @"myCacheKey"
 #define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SCREENWIDTH   [UIScreen mainScreen].bounds.size.width
 #define StringFormat(string, args...)       [NSString stringWithFormat:string, args]

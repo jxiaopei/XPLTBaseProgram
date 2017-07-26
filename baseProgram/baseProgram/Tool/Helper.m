@@ -36,8 +36,8 @@
  *  @return 格式化日期
  */
 + (NSString *)getDateFromThisDay:(NSInteger)day {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:[NSDate date]];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
     [components setDay:([components day]+day)];
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
@@ -329,7 +329,7 @@ static MBProgressHUD *loadingHud;
 static XPActivityIndicatorView *loading;
 + (void)showLoading {
     if (!loadingHud) {
-        loadingHud = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
+        loadingHud = [[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow].rootViewController.view];
         loadingHud.mode = MBProgressHUDModeCustomView;
         loadingHud.opacity = 0.5;
         loadingHud.removeFromSuperViewOnHide = YES;
@@ -340,18 +340,18 @@ static XPActivityIndicatorView *loading;
         [loading startAnimation];
         loadingHud.customView = custiomView;
         [[[UIApplication sharedApplication] keyWindow] addSubview:loadingHud];
-        [loadingHud show:YES];
+        [loadingHud showAnimated:YES];
     }
     else {
         [[[UIApplication sharedApplication] keyWindow] addSubview:loadingHud];
-        [loadingHud show:YES];
+         [loadingHud showAnimated:YES];
         [loading startAnimation];
     }
 }
 
 + (void)hideLoading {
     if(loadingHud) {
-        [loadingHud hide:YES];
+        [loadingHud hideAnimated:YES];
         [loading stopAnimation];
     }
 }
@@ -364,19 +364,19 @@ static MBProgressHUD *tipHud;
     }
     if (!tipHud) {
         tipHud = [MBProgressHUD new];
-        tipHud.labelText = tip;
-        tipHud.labelFont = [UIFont systemFontOfSize:12];
+        tipHud.label.text = tip;
+        tipHud.label.font = [UIFont systemFontOfSize:12];
         tipHud.mode = MBProgressHUDModeText;
         tipHud.dimBackground = NO;
         [[[UIApplication sharedApplication] keyWindow] addSubview:tipHud];
-        [tipHud show:YES];
-        [tipHud hide:YES afterDelay:1.5];
+        [tipHud showAnimated:YES];
+        [tipHud hideAnimated:YES afterDelay:1.5];
     }
     else {
-        tipHud.labelText = tip;
+        tipHud.label.text = tip;
         [[[UIApplication sharedApplication] keyWindow] addSubview:tipHud];
-        [tipHud show:YES];
-        [tipHud hide:YES afterDelay:1.5];
+        [tipHud showAnimated:YES];
+        [tipHud hideAnimated:YES afterDelay:1.5];
     }
 }
 
@@ -386,43 +386,43 @@ static MBProgressHUD *tipHud;
     }
     if (!tipHud) {
         tipHud = [MBProgressHUD new];
-        tipHud.labelText = tip;
-        tipHud.labelFont = [UIFont systemFontOfSize:12];
+        tipHud.label.text = tip;
+        tipHud.label.font = [UIFont systemFontOfSize:12];
         tipHud.mode = MBProgressHUDModeText;
         tipHud.dimBackground = NO;
         [[[UIApplication sharedApplication] keyWindow] addSubview:tipHud];
-        [tipHud show:YES];
-        [tipHud hide:YES afterDelay:duration];
+        [tipHud showAnimated:YES];
+        [tipHud hideAnimated:YES afterDelay:duration];
     }
     else {
-        tipHud.labelText = tip;
+        tipHud.label.text = tip;
         [[[UIApplication sharedApplication] keyWindow] addSubview:tipHud];
-        [tipHud show:YES];
-        [tipHud hide:YES afterDelay:duration];
+        [tipHud showAnimated:YES];
+        [tipHud hideAnimated:YES afterDelay:duration];
     }
 }
 
 static MBProgressHUD *progressHud;
 + (void)showProgressWithProgress:(float)progress {
     if (!progressHud) {
-        progressHud = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
+        progressHud = [[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow].rootViewController.view];
         progressHud.mode = MBProgressHUDModeAnnularDeterminate;
         progressHud.opacity = 0.5;
-        progressHud.labelText = @"正在上传图片";
-        progressHud.labelFont = [UIFont systemFontOfSize:12];
+        progressHud.label.text = @"正在上传图片";
+        progressHud.label.font = [UIFont systemFontOfSize:12];
         progressHud.progress = progress;
         [[[UIApplication sharedApplication] keyWindow] addSubview:progressHud];
-        [progressHud show:YES];
+        [progressHud showAnimated:YES];
     }
     else {
         progressHud.progress = progress;
-        [progressHud show:YES];
+        [progressHud showAnimated:YES];
     }
 }
 
 + (void)hideProgress {
     if(progressHud) {
-        [progressHud hide:YES];
+        [progressHud hideAnimated:YES];
         progressHud = nil;
     }
 }

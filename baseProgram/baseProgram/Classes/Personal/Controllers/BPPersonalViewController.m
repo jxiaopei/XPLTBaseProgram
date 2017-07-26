@@ -30,7 +30,22 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    BPUserModel *userModel = [BPUserModel shareModel];
+    NSString *lastUser = [[NSUserDefaults standardUserDefaults]objectForKey:@"lastUser"];
+    YYCache *cache = [YYCache cacheWithName:CacheKey];
+    BPUserModel *userModel = nil;
+    if([cache containsObjectForKey:lastUser])
+    {
+       userModel = (BPUserModel *)[cache objectForKey:lastUser];
+        BPUserModel *model = [BPUserModel shareModel];
+        model.userName = userModel.userName;
+        model.password = userModel.password;
+        model.changeUserName = userModel.changeUserName;
+        model.isLogin = userModel.isLogin;
+        
+    }else{
+       userModel = [BPUserModel shareModel];
+    }
+    
     NSString *userName = userModel.userName;
     userName = [userName stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     NSString *newUserName = userModel.changeUserName;
@@ -110,11 +125,11 @@
     switch (indexPath.row) {
         case 0:
             NSLog(@"充值");
-            [Helper showTip:@"敬请期待"];
+            [MBProgressHUD showSuccess:@"敬请期待"];
             break;
         case 1:
             NSLog(@"关注");
-            [Helper showTip:@"敬请期待"];
+            [MBProgressHUD showSuccess:@"敬请期待"];
             break;
         case 2:
             NSLog(@"设置");
@@ -122,7 +137,7 @@
             break;
         case 3:
             NSLog(@"邀请码");
-            [Helper showTip:@"敬请期待"];
+            [MBProgressHUD showSuccess:@"敬请期待"];
             break;
             
         default:
@@ -149,6 +164,11 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 46;
 }
 
 -(NSMutableArray *)titleArr
