@@ -1,0 +1,41 @@
+//
+//  BaseProgram.pch
+//  baseProgram
+//
+//  Created by iMac on 2017/7/20.
+//  Copyright © 2017年 eirc. All rights reserved.
+//
+
+#ifndef BaseProgram_pch
+#define BaseProgram_pch
+
+#import "AFNetworking.h"
+#import "MJExtension.h"
+#import "Masonry.h"
+#import "SVProgressHUD.h"
+#import "UIColor+Hex.h"
+#import "UMMobClick/MobClick.h"
+#import "UMessage.h"
+#import "Helper.h"
+#import "BPNetRequest.h"
+#import "UIImageView+WebCache.h"
+#import "XCTools.h"
+#import "CheckHelper.h"
+#import "MBProgressHUD+MJ.h"
+#import "BPUserModel.h"
+
+#define AppKey @"597744184ad1563827000c55" //友盟appKey
+#define AppSecret @"zyrwbkheorycufhbdcezn2svhcqrgx73"  //友盟app 秘钥
+
+#define COMPANYURL @"http://169.56.130.9/index/index/" //公司判断审核开关
+#define COMPANYPARA @{@"app_id":@"1262894465"}  //appID
+#define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
+#define SCREENWIDTH   [UIScreen mainScreen].bounds.size.width
+#define StringFormat(string, args...)       [NSString stringWithFormat:string, args]
+#define GlobalGrayColor                   [UIColor colorWithHexString:@"B3B3B3"]//灰色
+#define GlobalRedColor                    [UIColor colorWithHexString:@"c40000"]//灰色
+#define GlobalGreenColor                  [UIColor colorWithHexString:@"6CEDC3"]//绿色
+#define GlobalBlackColor                  [UIColor blackColor];
+
+
+#endif /* BaseProgram_pch */
